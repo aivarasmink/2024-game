@@ -29,6 +29,12 @@ while(True):
 		# and add a new two
 		if(status == 'GAME NOT OVER'):
 			logic.add_new_2(mat)
+		elif (status == 'NOT MOVE'):
+			sg.popup("  No move Up  ")
+			continue
+		elif (status == 'WON'):
+			sg.popup("  YUO WON !!! ")
+			logic.add_new_2(mat)
 		# else break the loop 
 		else:
 			choice = sg.popup_yes_no("  Game Over!\n Start a new game? (Yes)\n   Exit (No)")
@@ -45,6 +51,12 @@ while(True):
 		print(status)
 		if(status == 'GAME NOT OVER'):
 			logic.add_new_2(mat)
+		elif (status == 'NOT MOVE'):
+			sg.popup("  No move Down  ")
+			continue
+		elif (status == 'WON'):
+			sg.popup("  YUO WON !!! ")
+			logic.add_new_2(mat)
 		else:
 			choice = sg.popup_yes_no("  Game Over!\n Start a new game? (Yes)\n   Exit (No)")
 			if choice == "Yes":
@@ -60,6 +72,12 @@ while(True):
 		print(status)
 		if(status == 'GAME NOT OVER'):
 			logic.add_new_2(mat)
+		elif (status == 'NOT MOVE'):
+			sg.popup("  No move Left  ")
+			continue
+		elif (status == 'WON'):
+			sg.popup("  YUO WON !!! ")
+			logic.add_new_2(mat)
 		else:
 			choice = sg.popup_yes_no("  Game Over!\n Start a new game? (Yes)\n   Exit (No)")
 			if choice == "Yes":
@@ -74,6 +92,12 @@ while(True):
 		status = logic.get_current_state(mat)
 		print(status)
 		if(status == 'GAME NOT OVER'):
+			logic.add_new_2(mat)
+		elif (status == 'NOT MOVE'):
+			sg.popup("  No move Right  ")
+			continue
+		elif (status == 'WON'):
+			sg.popup("  YUO WON !!! ")
 			logic.add_new_2(mat)
 		else:
 			choice = sg.popup_yes_no("  Game Over!\n Start a new game? (Yes)\n   Exit (No)")
