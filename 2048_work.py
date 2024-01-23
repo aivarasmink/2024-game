@@ -7,7 +7,10 @@ if __name__ == '__main__':
 	sg.theme("DarkAmber")
 	layout = [[sg.Table(values=mat, headings=["Col1", "Col2", "Col3", "Col4"], justification="center",
 				num_rows=4, row_height=70, key="-TABLE-")],
-			[sg.Button('W'), sg.Button('S'), sg.Button('A'), sg.Button('D')],
+			[sg.Button('\u21C7', font="Arial 20", key ="-LEFT-"),
+			sg.Button('\u21C8', font="Arial 20", key ="-UP-"), 
+			sg.Button('\u21CA', font="Arial 20", key ="-DOWN-"), 
+			sg.Button('\u21C9', font="Arial 20", key ="-RIGHT-")],
         	[sg.Button("New Game", size=14), sg.Button("Exit", size=14)]
 	]
 	window = sg.Window("2048", layout)
@@ -16,14 +19,18 @@ while(True):
 	event, values = window.read()
 	if event == sg.WIN_CLOSED or event == "Exit":
 		break
-	elif event == "W":
+	elif event == "-UP-":
 		x = "W"
-	elif event == "S":
+	elif event == "-DOWN-":
 		x = "S"
-	elif event == "A":
+	elif event == "-LEFT-":
 		x = "A"
-	elif event == "D":
+	elif event == "-RIGHT-":
 		x = "D"
+	elif event == "New Game":
+		mat = logic.start_game()
+		window["-TABLE-"].update(values=mat)
+		continue
 
 	# we have to move up
 	if(x == 'W' or x == 'w'):
