@@ -42,18 +42,18 @@ def get_current_state(mat):
 				return 'GAME NOT OVER'
 
 
-	for i in range(3):
-		for j in range(3):
-			if(mat[i][j]== mat[i + 1][j] or mat[i][j]== mat[i][j + 1]):
-				return 'GAME NOT OVER'
+	# for i in range(3):
+	# 	for j in range(3):
+	# 		if(mat[i][j]== mat[i + 1][j] or mat[i][j]== mat[i][j + 1]):
+	# 			return 'GAME NOT OVER'
 
-	for j in range(3):
-		if(mat[3][j]== mat[3][j + 1]):
-			return 'GAME NOT OVER'
+	# for j in range(3):
+	# 	if(mat[3][j]== mat[3][j + 1]):
+	# 		return 'GAME NOT OVER'
 
-	for i in range(3):
-		if(mat[i][3]== mat[i + 1][3]):
-			return 'GAME NOT OVER'
+	# for i in range(3):
+	# 	if(mat[i][3]== mat[i + 1][3]):
+	# 		return 'GAME NOT OVER'
 
 	return 'LOST'
 
