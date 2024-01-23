@@ -6,11 +6,11 @@ if __name__ == '__main__':
 	mat = logic.start_game()
 	sg.theme("DarkAmber")
 	layout = [[sg.Table(values=mat, headings=["Col1", "Col2", "Col3", "Col4"], justification="center",
-				num_rows=4, row_height=70, key="-TABLE-")],
+						num_rows=4, row_height=70, key="-TABLE-")],
 			[sg.Button('\u21C7', font="Arial 20", key ="-LEFT-"),
-			sg.Button('\u21C8', font="Arial 20", key ="-UP-"), 
-			sg.Button('\u21CA', font="Arial 20", key ="-DOWN-"), 
-			sg.Button('\u21C9', font="Arial 20", key ="-RIGHT-")],
+			 sg.Button('\u21C8', font="Arial 20", key ="-UP-"), 
+			 sg.Button('\u21CA', font="Arial 20", key ="-DOWN-"), 
+			 sg.Button('\u21C9', font="Arial 20", key ="-RIGHT-")],
         	[sg.Button("New Game", size=14), sg.Button("Exit", size=14)]
 	]
 	window = sg.Window("2048", layout)
