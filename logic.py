@@ -25,7 +25,7 @@ def add_new_2(mat):
 		r = random.randint(0, 3)
 		c = random.randint(0, 3)
 
-	mat[r] = 2
+	mat[r][c] = 2
 
 def get_current_state(mat):
 	
