@@ -66,4 +66,5 @@ while(True):
 
 	# print the matrix after each
 	# move.
-	print(mat)
+	for list in mat:
+		print(list)
