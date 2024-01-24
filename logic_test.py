@@ -13,7 +13,7 @@ def add_new_2(mat):
         mat[r][c] = 2
 
 def compress(mat):
-    changed = FalseS
+    changed = False
     for i in range(4):
         pos = 0
         for j in range(4):
