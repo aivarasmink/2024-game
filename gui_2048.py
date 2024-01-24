@@ -3,11 +3,11 @@ import PySimpleGUI as sg
 
 def titles(user_theme):
 	sg.theme(user_theme)
-	layout = [[sg.Text("Game Director: Jolita Visockaitė", pad=((5,0), (20,0)))],
-              [sg.Text("Main Programer: Evaldas Gegeckas")],
-			  [sg.Text("Main Disigner: Martynas Pupkus")],
-			  [sg.Text("Main 2D Animator: Aivaras Minkevicius")],
-			  [sg.Text("Special Thank's to: Poltorak Anton")],
+	layout = [[sg.Text("Lead: Jolita Visockaitė", pad=((5,0), (20,0)))],
+              [sg.Text("Programer: Evaldas Gegeckas")],
+			  [sg.Text("Designer: Martynas Pupkus")],
+			  [sg.Text("2D Animator: Aivaras Minkevicius")],
+			  [sg.Text("GUI by: Poltorak Anton")],
 		      [sg.Button("Close", size=11, pad=((90,10), (30,0)))]
 	]
 	window = sg.Window("2048", layout)
