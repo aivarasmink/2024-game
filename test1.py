@@ -1,5 +1,20 @@
 import PySimpleGUI as sg
-from logic_test import start_game, move_up, move_down, move_left, move_right, add_new_2
+from logic_test import start_game, move_up, move_down, move_left, move_right, get_current_state, add_new_2
+
+# Define a mapping of values to colors
+VALUE_COLOR_MAP = {
+    2: "red",
+    4: "orange",
+    8: "yellow",
+    16: "green",
+    32: "blue",
+    64: "purple",
+    128: "pink",
+    256: "brown",
+    512: "cyan",
+    1024: "magenta",
+    2048: "black",
+}
 
 def main_window(user_theme, mat):
     sg.theme(user_theme)
@@ -15,6 +30,7 @@ def main_window(user_theme, mat):
          sg.Button('\u21CA', font="Arial 22", key="-DOWN-"),
          sg.Button('\u21C9', font="Arial 22", key="-RIGHT-")],
         [sg.Button("New Game", size=11, pad=((40, 10), (0, 0))), sg.Button("Exit", size=11)],
+        [sg.Text("", size=(20, 1), key="-GAMEOVER-", text_color="red", font="Any 15")],
     ]
 
     window = sg.Window("2048", layout)
@@ -25,7 +41,12 @@ def update_buttons(window, buttons, mat):
     for i in range(4):
         for j in range(4):
             button_key = (i, j)
-            window[button_key].update(mat[i][j] if mat[i][j] != 0 else '')
+            value = mat[i][j]
+            button_color = VALUE_COLOR_MAP.get(value, "white")
+            window[button_key].update(value if value != 0 else '', button_color=button_color)
+
+def display_game_over(window):
+    window["-GAMEOVER-"].update("Game Over!")
 
 if __name__ == '__main__':
     mat = start_game()
@@ -50,6 +71,10 @@ if __name__ == '__main__':
                 add_new_2(mat)
         elif event == "New Game":
             mat = start_game()
+            window["-GAMEOVER-"].update("")
         update_buttons(window, buttons, mat)
+
+        if get_current_state(mat) == 'LOST':
+            display_game_over(window)
 
     window.close()
