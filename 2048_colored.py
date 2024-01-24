@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from logic_test import start_game, move_up, move_down, move_left, move_right, get_current_state, add_new_2
+from logic_colored import start_game, move_up, move_down, move_left, move_right, get_current_state, add_new_2
 
 # Define a mapping of values to colors
 VALUE_COLOR_MAP = {
