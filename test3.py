@@ -2,71 +2,48 @@ import logic
 import gui_2048
 import PySimpleGUI as sg
 
-def create_game_layout(mat):
-    return [
-        [sg.Table(values=mat, justification="center",
-                  auto_size_columns=False, enable_events=True, key="-TABLE-")],
-        [sg.Button('\u21C7', font="Arial 22", key="-LEFT-"),
-         sg.Button('\u21C8', font="Arial 22", key="-UP-"),
-         sg.Button('\u21CA', font="Arial 22", key="-DOWN-"),
-         sg.Button('\u21C9', font="Arial 22", key="-RIGHT-")],
-        [sg.Button("New Game", size=11), sg.Button("Exit", size=11)],
-        [sg.Button("Change Theme", size=20)],
-        [sg.Button("The game creator's", size=20)]
-    ]
+# logic.py
 
-def main_window(user_theme, mat):
-    sg.theme(user_theme)
-    return sg.Window("2048", create_game_layout(mat))
+import random
 
-def handle_game_over(mat, user_theme, window):
-    choice = sg.popup_yes_no("Game Over!\nStart a new game? (Yes)\nExit (No)")
-    if choice == "Yes":
-        mat = logic.start_game()
-        window["-TABLE-"].update(values=mat)
-    else:
-        window.close()
+def start_game():
+    mat = [[0] * 4 for _ in range(4)]
+    add_new_2(mat)
+    add_new_2(mat)
+    return mat
 
-def handle_user_input(event, mat, user_theme, window):
-    if event in (sg.WIN_CLOSED, "Exit"):
-        return False
-    elif event in ("-UP-", "-DOWN-", "-LEFT-", "-RIGHT-"):
-        direction = event[1:]
-        mat, flag = logic.move(mat, direction)
-        status = logic.get_current_state(mat)
-        print(status)
+def move(mat, direction):
+    mat = transpose(mat) if direction in ['UP', 'DOWN'] else mat
+    reverse = direction in ['DOWN', 'RIGHT']
+    mat = [move_line(line, reverse) for line in mat]
+    mat = transpose(mat) if direction in ['UP', 'DOWN'] else mat
+    return mat
 
-        if status == 'GAME NOT OVER':
-            logic.add_new_2(mat)
-        elif status == 'NOT MOVE':
-            sg.popup(f"No move {direction.capitalize()}")
-        elif status == 'WON':
-            sg.popup("YOU WON!")
-            logic.add_new_2(mat)
-        else:
-            handle_game_over(mat, user_theme, window)
+def move_line(line, reverse=False):
+    line = sorted(line, reverse=reverse)
+    for i in range(len(line) - 1):
+        if line[i] == line[i + 1]:
+            line[i], line[i + 1] = 0, 2 * line[i]
+    line = [value for value in line if value != 0]
+    line = [0] * (len(line) - len(line)) + line
+    return line if not reverse else list(reversed(line))
 
-    elif event == "New Game":
-        mat = logic.start_game()
-        window["-TABLE-"].update(values=mat)
-    elif event == "The game creator's":
-        gui_2048.titles(user_theme)
-    elif event == "Change Theme":
-        user_theme = gui_2048.theme_select(user_theme)
-        window.close()
-        sg.theme(user_theme)
-        window = main_window(user_theme, mat)
-    window["-TABLE-"].update(values=mat)
-    return True
+def transpose(mat):
+    return [list(row) for row in zip(*mat)]
 
-if __name__ == '__main__':
-    mat = logic.start_game()
-    user_theme = "DarkAmber"
-    window = main_window(user_theme, mat)
+def add_new_2(mat):
+    empty_cells = [(i, j) for i in range(4) for j in range(4) if mat[i][j] == 0]
+    if empty_cells:
+        i, j = random.choice(empty_cells)
+        mat[i][j] = 2
 
-    while True:
-        event, values = window.read()
-        if not handle_user_input(event, mat, user_theme, window):
-            break
-
-window.close()
+def get_current_state(mat):
+    if any(2048 in row for row in mat):
+        return 'WON'
+    if any(0 in row for row in mat):
+        return 'GAME NOT OVER'
+    for i in range(4):
+        for j in range(3):
+            if mat[i][j] == mat[i][j + 1] or mat[j][i] == mat[j + 1][i]:
+                return 'GAME NOT OVER'
+    return 'LOST'
