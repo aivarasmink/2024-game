@@ -7,11 +7,11 @@ def start_game():
 	for i in range(4):
 		mat.append([0] * 4)
 
-	print("Commands are as follows : ")
-	print("'W' or 'w' : Move Up")
-	print("'S' or 's' : Move Down")
-	print("'A' or 'a' : Move Left")
-	print("'D' or 'd' : Move Right")
+	# print("Commands are as follows : ")
+	# print("'W' or 'w' : Move Up")
+	# print("'S' or 's' : Move Down")
+	# print("'A' or 'a' : Move Left")
+	# print("'D' or 'd' : Move Right")
 	
 	add_new_2(mat)
 	return mat
@@ -45,15 +45,15 @@ def get_current_state(mat):
 	for i in range(3):
 		for j in range(3):
 			if(mat[i][j]== mat[i + 1][j] or mat[i][j]== mat[i][j + 1]):
-				return 'GAME NOT OVER'
+				return 'NOT MOVE'
 
 	for j in range(3):
 		if(mat[3][j]== mat[3][j + 1]):
-			return 'GAME NOT OVER'
+			return 'NOT MOVE'
 
 	for i in range(3):
 		if(mat[i][3]== mat[i + 1][3]):
-			return 'GAME NOT OVER'
+			return 'NOT MOVE'
 
 	return 'LOST'
 
