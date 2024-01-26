@@ -38,7 +38,6 @@ while(True):
 		mat, flag = logic.move_up(mat)
 		# get the current state
 		status = logic.get_current_state(mat)
-		print(status)
 		# if game not over then continue
 		# and add a new two
 		if(status == 'GAME NOT OVER'):
@@ -62,7 +61,6 @@ while(True):
 		# to move down
 		mat, flag = logic.move_down(mat)
 		status = logic.get_current_state(mat)
-		print(status)
 		if(status == 'GAME NOT OVER'):
 			logic.add_new_2(mat)
 		elif (status == 'NOT MOVE'):
@@ -83,7 +81,6 @@ while(True):
 		# to move left
 		mat, flag = logic.move_left(mat)
 		status = logic.get_current_state(mat)
-		print(status)
 		if(status == 'GAME NOT OVER'):
 			logic.add_new_2(mat)
 		elif (status == 'NOT MOVE'):
@@ -104,7 +101,6 @@ while(True):
 		# to move right
 		mat, flag = logic.move_right(mat)
 		status = logic.get_current_state(mat)
-		print(status)
 		if(status == 'GAME NOT OVER'):
 			logic.add_new_2(mat)
 		elif (status == 'NOT MOVE'):
@@ -135,6 +131,5 @@ while(True):
 		continue
 
 	window["-TABLE-"].update(values=mat)
-	for list in mat:
-		print(list)
+
 window.close()
