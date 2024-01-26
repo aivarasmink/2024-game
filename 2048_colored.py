@@ -13,7 +13,7 @@ VALUE_COLOR_MAP = {
     256: "brown",
     512: "cyan",
     1024: "magenta",
-    2048: "black",
+    2048: "white",
 }
 
 def main_window(user_theme, mat):
@@ -42,7 +42,7 @@ def update_buttons(window, buttons, mat):
         for j in range(4):
             button_key = (i, j)
             value = mat[i][j]
-            button_color = VALUE_COLOR_MAP.get(value, "white")
+            button_color = VALUE_COLOR_MAP.get(value, "grey")
             window[button_key].update(value if value != 0 else '', button_color=button_color)
 
 def display_game_over(window):
